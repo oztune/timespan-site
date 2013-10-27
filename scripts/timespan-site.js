@@ -7,7 +7,7 @@ To figure out:
 (function () {
     'use strict';
 
-    angular.module('timespan-site', [])
+    angular.module('timespan-site', ['ngAnimate', 'ngAnimate-animate.css'])
         .constant('examples', [
             'last week',
             'today',
@@ -91,7 +91,7 @@ To figure out:
                 }
             };
         })
-        .directive('flipThrough', function () {
+        .directive('flipThrough', function ($timeout) {
             return {
                 restrict: 'A',
                 scope: true,
@@ -99,7 +99,7 @@ To figure out:
                     var list = scope.$eval(attrs.flipThrough),
                         toUse;
 
-                    change();
+                    $timeout(change, 1000);
 
                     function change () {
                         var index, value;
@@ -118,13 +118,15 @@ To figure out:
                             .animate({
                                 'top': '0%'
                             }, 300)
-                            .delay(2000)
-                            .animate({
+
+                        $timeout(function () {
+                            el.animate({
                                 'top': '100%'
                             }, 300, function () {
                                 change();
                                 scope.$apply();
                             });
+                        }, 2000);                            
                     }
                 }
             };

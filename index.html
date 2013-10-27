@@ -1,123 +1,129 @@
 <!DOCTYPE html>
 <html ng-app="timespan-site">
-  <head>
-    <title>timespan.js</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="css/timespan.css" />
-    <link rel="stylesheet" href="fonts/omnes/stylesheet.css" />
-    <link rel="stylesheet" href="fonts/icons/style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="jumbotron">
-        <h1>timespan.js</h1>
-        <p class="lead">An elegant javascript library for parsing and manipulating date ranges with built-in <strong>natural language processing</strong></p>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-          <div class="timespan-example" ng-controller="example">
-            <div class="input">
-              <input type="text" class="form-control" ng-model="dateInput" focused="focused">
-              <i class="icon-calendar"></i>
-              <span class="placeholder" ng-show="state=='start'" flip-through="examples" ng-cloak>e.g: <em>'{{flipThrough}}'</em></span>
-            </div>
-            <div class="output" ng-switch="state">
-              <div ng-switch-when="start">Go ahead, give it a try</div>
-              <span ng-switch-when="valid" ng-cloak>
-                <span class="date">{{start}}</span><span class="separator">to</span><span class="date">{{end}}</span>
-              </span>
-              <span ng-switch-when="loading"></span>
-              <span ng-switch-default ng-cloak>
-                <span ng-show="state=='invalid'">Couldn't parse "<strong>{{dateInput}}</strong>".</span>
-                <div ng-hide="notFocuseda" class="examples">E.g:
-                  <a href ng-repeat-start="example in examples|limitTo:examplesLimit" ng-click="setInput(example)">{{example}}</a><span ng-repeat-end>, </span>
-                  <div class="dropdown">
-                    <a href data-toggle="dropdown">more<i class="caret"></i></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                      <li role="presentation" ng-repeat="example in examples.slice(examplesLimit)">
-                        <a role="menuitem" ng-click="setInput(example)" tabindex="-1" href="#">{{example}}</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<head>
+	<title>timespan.js</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="css/timespan.css" />
+	<link rel="stylesheet" href="css/animate.css" />
+	<link rel="stylesheet" href="fonts/omnes/stylesheet.css" />
+	<link rel="stylesheet" href="fonts/icons/style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>timespan.js</h1>
+			<p class="lead">An elegant javascript library for parsing and manipulating date ranges with built-in <strong>natural language processing</strong></p>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-lg-offset-3">
+				<div class="timespan-example" ng-controller="example">
+					<div class="input">
+						<input type="text" class="form-control" ng-model="dateInput" focused="focused">
+						<i class="icon-calendar"></i>
+						<span class="placeholder dn-fade-up" ng-show="state=='start' && flipThrough" flip-through="examples" ng-cloak>e.g: <em>'{{flipThrough}}'</em></span>
+					</div>
+					<div class="output" ng-switch="state">
+						<div ng-switch-when="start" class="dn-fade-up">Go ahead, give it a try</div>
+						<div ng-switch-when="valid" class="tokens dn-fade-up" ng-cloak>
+							<span class="end">[</span><span class="date">{{start}}</span><span class="separator">,</span><span class="date">{{end}}</span><span class="end">]</span>
+						</div>
+						<span ng-switch-when="loading"></span>
+						<div ng-switch-default ng-cloak>
+							<div class="error" ng-show="state=='invalid'">Couldn't parse "<strong>{{dateInput}}</strong>".</div>
+							<div ng-hide="notFocuseda" class="examples">E.g:
+								<a href ng-repeat-start="example in examples|limitTo:examplesLimit" ng-click="setInput(example)">{{example}}</a><span ng-repeat-end>, </span>
+								<div class="dropdown">
+									<a href data-toggle="dropdown">more<i class="caret"></i></a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+										<li role="presentation" ng-repeat="example in examples.slice(examplesLimit)">
+											<a role="menuitem" ng-click="setInput(example)" tabindex="-1" href="#">{{example}}</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="main-menu">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-lg-offset-3">
-            <a href="#">
-              <i class="icon-arrow-down"></i> download (1kb gz)
-            </a>
-          </div>
-          <div class="col-lg-3">
-            <a href="#">
-              <i class="icon-github"></i> view source (v0.1)
-            </a>
-          </div>
-          <!--<div class="col-lg-4">
-            <a href="#">
-              <i class="icon-map"></i> documentation
-            </a>
-          </div>-->
-        </div>
-      </div>
-    </div>
+	<div class="main-menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-lg-offset-3">
+					<a href="#">
+						<i class="icon-arrow-down"></i> download (1kb gz)
+					</a>
+				</div>
+				<div class="col-lg-3">
+					<a href="#">
+						<i class="icon-github"></i> view source (v0.1)
+					</a>
+				</div>
+					<!--<div class="col-lg-4">
+						<a href="#">
+							<i class="icon-map"></i> documentation
+						</a>
+					</div>-->
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="container">
-      <div class="content">
-        <section>
-          <h3>date ranges are more fun with timespan.js</h3>
-          <pre>timespan('last week')
-          timespan('this year').contains('this week')
-          timespan('50 days ago').unit('month')</pre>
-        </section>
+	<div class="container">
+		<div class="content">
+			<section>
+				<h3>date ranges are more fun with timespan.js</h3>
+				<pre>timespan('last week')
+					timespan('this year').contains('this week')
+					timespan('50 days ago').unit('month')
+				</pre>
+			</section>
+			<section>
+				<h3>date ranges are more fun with timespan.js</h3>
+				<pre>timespan('last week')
+					timespan('this year').contains('this week')
+					timespan('50 days ago').unit('month')
+				</pre>
+			</section>
 
-        <section>
-          <h3>date ranges are more fun with timespan.js</h3>
-    <pre>timespan('last week')
-    timespan('this year').contains('this week')
-    timespan('50 days ago').unit('month')</pre>
-        </section>
+			<section>
+				<h3>date ranges are more fun with timespan.js</h3>
+				<pre>timespan('last week')
+					timespan('this year').contains('this week')
+					timespan('50 days ago').unit('month')
+				</pre>
+			</section>
 
-        <section>
-          <h3>date ranges are more fun with timespan.js</h3>
-    <pre>timespan('last week')
-    timespan('this year').contains('this week')
-    timespan('50 days ago').unit('month')</pre>
-        </section>
+			<section>
+				<h3>Time-tested, mother-approved</h3>
+				<p>timespan.js is used and maintained by appFigures, where it withstands grueling punishment by tens of thousands of uncompromising users a daily basis.
+				</p>
+			</section>
 
-        <section>
-          <h3>Time-tested, mother-approved</h3>
-          <p>timespan.js is used and maintained by appFigures, where it withstands grueling punishment by tens of thousands of uncompromising users a daily basis.</p>
-        </section>
+			<section>
+				<h3>Works on older browsers too</h3>
+			</section>
+		</div>
+	</div>
 
-        <section>
-          <h3>Works on older browsers too</h3>
-        </section>
-      </div>
-    </div>
+	<div class="footer">
+		<div class="container">
+			timespan.js is created and maintained by the well-groomed folks at <a href="http://appfigures.com" target="_blank">appFigures</a>
+		</div>
+	</div>
 
-    <div class="footer">
-      <div class="container">
-        timespan.js is created and maintained by the well-groomed folks at <a href="http://appfigures.com" target="_blank">appFigures</a>
-      </div>
-    </div>
-
-    <script src="//code.jquery.com/jquery.js"></script>
-    <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
-    <script src="libs/bootstrap-dropdown.js"></script>
-    <script src="libs/angular.js"></script>
-    <script src="libs/moment.js"></script>
-    <script src="libs/dateparser.js"></script>
-    <script src="libs/timespan.js"></script>
-    <script src="scripts/timespan-site.js"></script>
-  </body>
+	<script src="//code.jquery.com/jquery.js"></script>
+	<script src="libs/bootstrap-dropdown.js"></script>
+	<script src="libs/angular.js"></script>
+	<script src="libs/angular-animate.js"></script>
+	<script src="libs/animate.js"></script>
+	<script src="libs/moment.js"></script>
+	<script src="libs/dateparser.js"></script>
+	<script src="libs/timespan.js"></script>
+	<script src="scripts/timespan-site.js"></script>
+</body>
 </html>

@@ -6110,11 +6110,22 @@ h3 {
   text-align: center;
   font-size: 16px;
   position: absolute;
-  top: 77px;
+  top: 67px;
   left: 0;
   right: 0;
 }
-.timespan-example .output .date {
+.timespan-example .output > [ng-switch-when] {
+  position: absolute;
+  width: 100%;
+}
+.timespan-example .output .tokens {
+  margin-top: 10px;
+}
+.timespan-example .output .tokens > * {
+  display: inline-block;
+  vertical-align: top;
+}
+.timespan-example .output .tokens .date {
   padding: 6px 20px;
   font-weight: 300;
   font-size: 13px;
@@ -6126,9 +6137,24 @@ h3 {
   color: white;
   cursor: default;
 }
-.timespan-example .output .separator {
-  margin: 0 10px;
-  color: #999999;
+.timespan-example .output .tokens .date:hover {
+  background-color: #00a0a9;
+}
+.timespan-example .output .tokens .separator,
+.timespan-example .output .tokens .end {
+  color: #7eb6ba;
+  font-size: 40px;
+  font-weight: 200;
+  line-height: 21px;
+}
+.timespan-example .output .tokens .end {
+  margin: 0 2px;
+}
+.timespan-example .output .tokens .separator {
+  margin: 0 5px 0 2px;
+}
+.timespan-example .output .error {
+  margin-bottom: 5px;
 }
 .timespan-example .examples {
   color: #999999;

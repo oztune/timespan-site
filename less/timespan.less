@@ -87,6 +87,7 @@ h1, h2, h3 {
             right: 0;
             color: @gray-light;
             text-align: center;
+            // z-index: 100;
 
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -130,25 +131,54 @@ h1, h2, h3 {
         text-align: center;
         font-size: 16px;
         position: absolute;
-        top: 77px;
+        top: 77px - 10;
         left: 0;
         right: 0;
 
-        .date {
-            padding: 6px 20px;
-            font-weight: 300;
-            font-size: 13px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-radius: 100px;
-            display: inline-block;
-            background: #007E85;//@theme-color;
-            color: white;
-            cursor: default;
+        > [ng-switch-when] {
+            position: absolute;
+            width: 100%;
         }
-        .separator {
-            margin: 0 10px;
-            color: @gray-light;
+
+        .tokens {
+            margin-top: 10px;
+            > * {
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .date {
+                padding: 6px 20px;
+                font-weight: 300;
+                font-size: 13px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                border-radius: 100px;
+                display: inline-block;
+                background: #007E85;//@theme-color;
+                color: white;
+                cursor: default;
+
+                &:hover {
+                    background-color: darken(@theme-color, 8%);
+                }
+            }
+            .separator, .end {
+                color: lighten(desaturate(@theme-color, 70%), 20%);
+                font-size: 40px;
+                font-weight: 200;
+                line-height: 21px;
+            }
+            .end {
+                margin: 0 2px;
+            }
+            .separator {
+                margin: 0 5px 0 2px;
+            }
+        }
+
+        .error {
+            margin-bottom: 5px;
         }
     }
 

@@ -22,17 +22,17 @@
 					<div class="input">
 						<input type="text" class="form-control" ng-model="dateInput" focused="focused">
 						<i class="icon-calendar"></i>
-						<span class="placeholder dn-fade-up" ng-show="state=='start' && flipThrough" flip-through="examples" ng-cloak>e.g: <em>'{{flipThrough}}'</em></span>
+						<span class="placeholder" ng-show="!dateInput && flipThrough" ng-showa="state=='start' && flipThrough" flip-through="examples" ng-cloak>e.g. <em>'{{flipThrough}}'</em></span>
 					</div>
 					<div class="output" ng-switch="state">
-						<div ng-switch-when="start" class="dn-fade-up">Go ahead, give it a try</div>
-						<div ng-switch-when="valid" class="tokens dn-fade-up" ng-cloak>
+						<div ng-switch-when="start" class="">Go ahead, give it a try</div>
+						<div ng-switch-when="valid" class="tokens" ng-cloak>
 							<span class="end">[</span><span class="date">{{start}}</span><span class="separator">,</span><span class="date">{{end}}</span><span class="end">]</span>
 						</div>
 						<span ng-switch-when="loading"></span>
 						<div ng-switch-default ng-cloak>
 							<div class="error" ng-show="state=='invalid'">Couldn't parse "<strong>{{dateInput}}</strong>".</div>
-							<div ng-hide="notFocuseda" class="examples">E.g:
+							<div class="examples">e.g.
 								<a href ng-repeat-start="example in examples|limitTo:examplesLimit" ng-click="setInput(example)">{{example}}</a><span ng-repeat-end>, </span>
 								<div class="dropdown">
 									<a href data-toggle="dropdown">more<i class="caret"></i></a>

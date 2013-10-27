@@ -2,6 +2,12 @@
 To figure out:
 - Documentation page
 - Unit tests
+
+TODO
+- example
+    - animations
+    - Add X on input
+    - Give it a try arrow + aniamtion
 */
 
 (function () {

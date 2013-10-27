@@ -6114,10 +6114,6 @@ h3 {
   left: 0;
   right: 0;
 }
-.timespan-example .output > [ng-switch-when] {
-  position: absolute;
-  width: 100%;
-}
 .timespan-example .output .tokens {
   margin-top: 10px;
 }

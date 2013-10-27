@@ -17,19 +17,31 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
-          <div class="example" ng-controller="example">
+          <div class="timespan-example" ng-controller="example">
             <div class="input">
-              <input type="text" class="form-control" ng-model="dateInput">
+              <input type="text" class="form-control" ng-model="dateInput" focused="focused">
               <i class="icon-calendar"></i>
-              <span class="placeholder" ng-show="!dateInput">e.g: 'last week'</span>
+              <span class="placeholder" ng-show="state=='start'" flip-through="examples" ng-cloak>e.g: <em>'{{flipThrough}}'</em></span>
             </div>
             <div class="output" ng-switch="state">
-              <div ng-switch-when="start">Go ahead, make my day</div>
+              <div ng-switch-when="start">Go ahead, give it a try</div>
               <span ng-switch-when="valid" ng-cloak>
                 <span class="date">{{start}}</span><span class="separator">to</span><span class="date">{{end}}</span>
               </span>
-              <span ng-switch-when="invalid" ng-cloak>
-                Couldn't parse "<strong>{{dateInput}}</strong>". May we <a href>suggest</a> some?
+              <span ng-switch-when="loading"></span>
+              <span ng-switch-default ng-cloak>
+                <span ng-show="state=='invalid'">Couldn't parse "<strong>{{dateInput}}</strong>".</span>
+                <div ng-hide="notFocuseda" class="examples">E.g:
+                  <a href ng-repeat-start="example in examples|limitTo:examplesLimit" ng-click="setInput(example)">{{example}}</a><span ng-repeat-end>, </span>
+                  <div class="dropdown">
+                    <a href data-toggle="dropdown">more<i class="caret"></i></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                      <li role="presentation" ng-repeat="example in examples.slice(examplesLimit)">
+                        <a role="menuitem" ng-click="setInput(example)" tabindex="-1" href="#">{{example}}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </span>
             </div>
           </div>
@@ -101,6 +113,7 @@
 
     <script src="//code.jquery.com/jquery.js"></script>
     <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
+    <script src="libs/bootstrap-dropdown.js"></script>
     <script src="libs/angular.js"></script>
     <script src="libs/moment.js"></script>
     <script src="libs/dateparser.js"></script>

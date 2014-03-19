@@ -343,6 +343,6 @@ timespan.parse.options = {
 
 timespan.date = $date;
 
-this.timespan = timespan;
+this['timespan'] = timespan;
 
 }(moment, DateParser));

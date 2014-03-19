@@ -1,5 +1,4 @@
 (function (moment, DateParser, undefined) {
-'use strict';
 
 ///////////
 // Utils //

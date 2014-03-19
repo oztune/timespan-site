@@ -8,8 +8,12 @@
 var $date = moment,
     isMoment = $date.isMoment,
     // TODO: Remove these dependencies
-    isArray = jQuery.isArray,
-    isDate = angular.isDate;
+    isArray = function (obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
+    },
+    isDate = function (obj) {
+        return Object.prototype.toString.call(obj) === '[object Date]';
+    };
 
 // Date min/max. Null is bigger
 // and smaller

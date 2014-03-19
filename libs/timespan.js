@@ -182,8 +182,12 @@ timespan.fn = timespan.prototype = {
 
     // Helpers
     unit: function (unit) {
-        var start = this.start(),
-            end = this.end();
+        var start, end;
+
+        if (!unit) return this;
+        
+        start = this.start();
+        end = this.end();
 
         return this.range(start && start.startOf(unit),
                             end && end.endOf(unit));

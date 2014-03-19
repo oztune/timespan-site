@@ -1,4 +1,4 @@
-(function (window, moment, DateParser, undefined) {
+(function (moment, DateParser, undefined) {
 'use strict';
 
 ///////////
@@ -343,6 +343,6 @@ timespan.parse.options = {
 
 timespan.date = $date;
 
-window.timespan = timespan;
+this.timespan = timespan;
 
-}(window, window.moment, window.DateParser));
+}(moment, DateParser));
